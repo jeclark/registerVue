@@ -1,0 +1,54 @@
+Arguments: 
+  /usr/local/Cellar/node/8.1.4/bin/node /usr/local/bin/yarn add caniuse-lite
+
+PATH: 
+  /Applications/Sencha/Test/2_1_1_31/stc:/Users/bryan/bin/Sencha/Cmd/4.0.4.84:/Users/bryan/bin/Sencha/Cmd/5.1.3.61:/Users/bryan/.rvm/gems/ruby-2.1.3/bin:/Users/bryan/.rvm/gems/ruby-2.1.3@global/bin:/Users/bryan/.rvm/rubies/ruby-2.1.3/bin:/Users/bryan/bin/Sencha/Cmd/5.1.3.61:/usr/local/bin:/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/bryan/.rvm/bin:/Users/bryan/.rvm/bin:/Users/bryan/.rvm/bin
+
+Yarn version: 
+  0.17.0
+
+Node version: 
+  8.1.4
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "toolkit",
+    "version": "1.0.0",
+    "description": "12ftguru Vue Starter",
+    "author": "Bryan P Johnson <bryan@12ftguru.com>",
+    "private": true,
+    "scripts": {
+      "dev": "nuxt",
+      "build": "nuxt build",
+      "start": "nuxt start",
+      "generate": "nuxt generate",
+      "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+      "precommit": "npm run lint"
+    },
+    "dependencies": {
+      "nuxt": "^1.0.0-rc11"
+    },
+    "devDependencies": {
+      "babel-eslint": "^7.2.3",
+      "eslint": "^4.3.0",
+      "eslint-config-standard": "^10.2.1",
+      "eslint-loader": "^1.9.0",
+      "eslint-plugin-html": "^3.1.1",
+      "eslint-plugin-import": "^2.7.0",
+      "eslint-plugin-node": "^5.1.1",
+      "eslint-plugin-promise": "^3.5.0",
+      "eslint-plugin-standard": "^3.0.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: ENOENT: no such file or directory, chmod '/Users/bryan/Projects/toolkit/node_modules/.bin/semver'
