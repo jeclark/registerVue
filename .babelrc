@@ -18,7 +18,11 @@
           "alias": {
             "~/": "./"
           }
-      }]]
+      }],
+      [
+        "groundskeeper-willie",
+        { removeConsole: true, removeDebugger: true, removePragma: true }
+      ]]
     }
   }
 }

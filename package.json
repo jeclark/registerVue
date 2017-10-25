@@ -6,17 +6,14 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
+    "build": "NODE_ENV=production nuxt build",
+    "start": "NODE_ENV=production nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "lint-staged",
     "test": "NODE_ENV=test ./node_modules/.bin/jest"
   },
-  "browsersList": [
-    "> 1%",
-    "last 2 versions"
-  ],
+  "browsersList": ["> 1%", "last 2 versions"],
   "lint-staged": {
     "*.js": [
       "node ./util/prettier_css.js",
@@ -40,10 +37,7 @@
       "^vue$": "vue/dist/vue.common.js",
       "~/(.*)/([^/]+)$": "<rootDir>/$1/$2"
     },
-    "moduleFileExtensions": [
-      "js",
-      "vue"
-    ],
+    "moduleFileExtensions": ["js", "vue"],
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
@@ -55,6 +49,7 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "babel-jest": "^21.2.0",
+    "babel-plugin-groundskeeper-willie": "^1.3.2",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",

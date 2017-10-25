@@ -19,6 +19,8 @@
 <script>
 import Logo from '~/components/Logo.vue';
 
+console.log('You are Here!');
+
 export default {
   components: {
     Logo

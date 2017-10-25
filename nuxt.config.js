@@ -9,9 +9,9 @@ if (process.env.NODE_ENV !== 'production') {
     require('postcss-custom-media')(),
     require('postcss-prettify')()
   ];
-  /* babel = {
+  babel = {
     presets: ["vue-app"]
-  }; */
+  };
 } else {
   postcss = [
     require('postcss-normalize')({ browserslist: pkg.browsersList }),
@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
     require('postcss-custom-media')(),
     require('css-mqpacker')()
   ];
-  /*  babel = {
+  babel = {
     presets: ["vue-app"],
     plugins: [
       [
@@ -28,7 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
         { removeConsole: true, removeDebugger: true, removePragma: true }
       ]
     ]
-  }; */
+  };
 }
 
 module.exports = {
@@ -57,9 +57,7 @@ module.exports = {
   */
   build: {
     postcss,
-    /*
-      babel,
-    */
+    babel,
     /*
     ** Run ESLint on save
     */
