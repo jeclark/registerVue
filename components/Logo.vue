@@ -8,7 +8,7 @@
 </template>
 
 <script>
-//Nothing to see here.
+// Nothing to see here.
 </script>
 
 <style>

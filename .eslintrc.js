@@ -3,11 +3,12 @@ module.exports = {
   parser: 'babel-eslint',
   env: {
     browser: true,
-    node: true
+    node: true,
+    "jest/globals": true
   },
-  extends: ['standard', 'prettier'],
+  extends: ['standard', 'prettier', 'plugin:jest/recommended'],
   // required to lint *.vue files
-  plugins: ['html', 'prettier'],
+  plugins: ['html', 'prettier', 'jest'],
   // add your custom rules here
   rules: {
     'no-console': 0,
