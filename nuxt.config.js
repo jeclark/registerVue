@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
     require('postcss-prettify')()
   ];
   babel = {
-    presets: ["vue-app"]
+    presets: ['vue-app']
   };
 } else {
   postcss = [
@@ -21,10 +21,10 @@ if (process.env.NODE_ENV !== 'production') {
     require('css-mqpacker')()
   ];
   babel = {
-    presets: ["vue-app"],
+    presets: ['vue-app'],
     plugins: [
       [
-        "groundskeeper-willie",
+        'groundskeeper-willie',
         { removeConsole: true, removeDebugger: true, removePragma: true }
       ]
     ]
