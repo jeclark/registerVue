@@ -1,5 +1,5 @@
 {
-  "name": "toolkit",
+  "name": "12ft-toolkit",
   "version": "1.0.0",
   "description": "12ftguru Vue Starter",
   "author": "Bryan P Johnson <bryan@12ftguru.com>",
@@ -11,7 +11,7 @@
     "generate": "nuxt generate",
     "lint": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "lint-staged",
-    "test": "NODE_ENV=test ./node_modules/.bin/jest",
+    "test": "NODE_ENV=test ./node_modules/.bin/jest --coverage",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "browsersList": ["> 1%", "last 2 versions"],
@@ -39,6 +39,7 @@
       "~/(.*)/([^/]+)$": "<rootDir>/$1/$2"
     },
     "moduleFileExtensions": ["js", "vue"],
+    "mapCoverage": true,
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
