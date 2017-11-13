@@ -58,6 +58,21 @@ We use [lint-staged](https://github.com/okonet/lint-staged) to automatically lin
 
 If this isn't happening automatically, then likely lint-staged, or its dependency [Husky](https://github.com/typicode/husky) did not install the proper hooks. I haven't found an easy fix for this, other than re-installing husky/lint-staged. Alternately, you can run `yarn precommit` to manually do the cleanup stage on files added via `git add`.
 
+### PostCSS Toolchain
 
+The following PostCSS plugins are called, in order:
 
+#### Development
+ 1. [postcss-normalize](https://github.com/jonathantneal/postcss-normalize)
+ 1. [cssnext](http://cssnext.io/)
+ 1. [css-declaration-sorter](https://github.com/Siilwyn/css-declaration-sorter) Using the [concentric-css order](https://github.com/Siilwyn/css-declaration-sorter#sorting-orders).
+ 1. [postcss-custom-media](https://github.com/postcss/postcss-custom-media)
+ 1. [postcss-prettify](https://github.com/codekirei/postcss-prettify)
+ 
+#### Production
+ 1. [postcss-normalize](https://github.com/jonathantneal/postcss-normalize) -- uses the `package.json` browsersList config.
+ 1. [cssnext](http://cssnext.io/) -- also uses the `package.json` browsersList config.
+ 1. [css-declaration-sorter](https://github.com/Siilwyn/css-declaration-sorter) Using the [concentric-css order](https://github.com/Siilwyn/css-declaration-sorter#sorting-orders).
+ 1. [postcss-custom-media](https://github.com/postcss/postcss-custom-media)
+ 1. [css-mqpacker](https://github.com/hail2u/node-css-mqpacker)
 
