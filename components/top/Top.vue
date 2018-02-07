@@ -1,5 +1,7 @@
 <template>
-  <footer class="bottom">Footer junk here</footer>
+  <div class="charts">
+    Chart Stuff Here
+  </div>
 </template>
 
 <script>

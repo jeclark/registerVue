@@ -1,5 +1,7 @@
 <template>
-  <div> I am not a fucking footer!</div>
+  <div class="charts">
+    Chart Stuff Here
+  </div>
 </template>
 
 <script>
