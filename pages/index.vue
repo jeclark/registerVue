@@ -1,25 +1,27 @@
 <template>
-  <li className={"entryItem "}>
-        <div className="itemOptions">
-          <button
-            className="fa fa-pencil itemEdit"
-            aria-hidden="true"></button>
-          <button
-            className="fa fa-times itemEdit"
-            aria-hidden="true"></button>
-          <button
-            className={"fa fa-check itemEdit"}
-            aria-hidden="true"></button>
-        </div>
-        <div className="entryName">Payee</div>
-        <div className="entryAmount">$Amount</div>
-        <div className="entryDate">Date </div>
-        <div className="entryTags">tags</div>
-      </li>
+  <div class="wrapper">
+    <Top/>
+    <EntryList/>
+    <Charts/>
+    <Bottom/>
+  </div>
 </template>
 
 <script>
-// Nothing to see here.
+import Bottom from '~/components/bottom/Bottom.vue';
+import Charts from '~/components/charts/Charts.vue';
+import EntryList from '~/components/entrylist/EntryList.vue';
+import Top from '~/components/top/Top.vue';
+
+console.log('You are Here!');
+export default {
+  components: {
+    Bottom,
+    Charts,
+    EntryList,
+    Top
+  }
+};
 </script>
 
 <style>
