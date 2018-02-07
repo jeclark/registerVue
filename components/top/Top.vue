@@ -1,6 +1,6 @@
 <template>
-  <div class="charts">
-    Chart Stuff Here
+  <div class="top">
+    Top Stuff Here
   </div>
 </template>
 

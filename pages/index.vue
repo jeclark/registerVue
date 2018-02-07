@@ -1,17 +1,26 @@
 <template>
-  <div class="entryList">
-      <ul>
-        <EntryItem />
-      </ul>
+  <div class="wrapper">
+    <Top/>
+    <EntryList/>
+    <Charts/>
+    <Bottom/>
+    foo
   </div>
 </template>
 
 <script>
-import EntryItem from '~/components/entrylist/EntryItem.vue';
+import Bottom from '~/components/bottom/Bottom.vue';
+import Charts from '~/components/charts/Charts.vue';
+import EntryList from '~/components/entrylist/EntryList.vue';
+import Top from '~/components/top/Top.vue';
 
+console.log('You are Here!');
 export default {
   components: {
-    EntryItem
+    Bottom,
+    Charts,
+    EntryList,
+    Top
   }
 };
 </script>

@@ -2,6 +2,7 @@
   <div class="entryList">
       <ul>
         <EntryItem />
+        test
       </ul>
   </div>
 </template>
