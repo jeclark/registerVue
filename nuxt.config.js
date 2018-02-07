@@ -3,6 +3,8 @@ const pkg = require('./package.json');
 
 if (process.env.NODE_ENV !== 'production') {
   postcss = [
+    require('postcss-import')(),
+    require('postcss-nested')(),
     require('postcss-normalize')({ browserslist: pkg.browsersList }),
     require('postcss-cssnext')({ browsers: pkg.browsersList }),
     require('css-declaration-sorter')({ order: 'concentric-css' }),
@@ -14,6 +16,8 @@ if (process.env.NODE_ENV !== 'production') {
   };
 } else {
   postcss = [
+    require('postcss-import')(),
+    require('postcss-nested')(),
     require('postcss-normalize')({ browserslist: pkg.browsersList }),
     require('postcss-cssnext')({ browsers: pkg.browsersList }),
     require('css-declaration-sorter')({ order: 'concentric-css' }),
@@ -46,7 +50,6 @@ module.exports = {
         content: '12ftguru Vue Starter'
       }
     ],
-    css: ['font-awesome/css/font-awesome.css'],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*

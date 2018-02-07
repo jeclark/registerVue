@@ -1,25 +1,21 @@
 <template>
   <li class="entryItem">
         <div class="itemOptions">
-          <button
-            class="fa fa-pencil itemEdit"
-            aria-hidden="true"></button>
-          <button
-            class="fa fa-times itemEdit"
-            aria-hidden="true"></button>
-          <button
-            class="fa fa-check itemEdit"
-            aria-hidden="true"></button>
+          <button class="fa fa-pencil itemEdit" aria-hidden="true"></button>
+          <button class="fa fa-times itemEdit" aria-hidden="true"></button>
+          <button class="fa fa-check itemEdit" aria-hidden="true"></button>
         </div>
-        <div class="entryName">Payee</div>
-        <div class="entryAmount">$Amount</div>
-        <div class="entryDate">Date </div>
-        <div class="entryTags">tags</div>
+        <div class="entryName">{{ entryitem.payee }}</div>
+        <div class="entryAmount">${{ entryitem.amount }}</div>
+        <div class="entryDate">{{ entryitem.date }} </div>
+        <div class="entryTags">{{ entryitem.tags }}</div>
       </li>
 </template>
 
 <script>
-// Nothing to see here.
+export default {
+  props: ['entryitem']
+};
 </script>
 
 <style>

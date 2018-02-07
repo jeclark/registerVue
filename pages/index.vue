@@ -25,6 +25,8 @@ export default {
 </script>
 
 <style>
+@import '../assets/font-awesome/css/font-awesome.css';
+
 .wrapper {
   display: grid;
   grid-auto-flow: column dense;  /* or 'row dense', 'column', 'column dense' */
