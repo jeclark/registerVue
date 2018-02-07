@@ -1,5 +1,5 @@
 <template>
-  <footer class="bottom">Footer junk here</footer>
+  <div> I am not a fucking footer!</div>
 </template>
 
 <script>
@@ -17,6 +17,17 @@
   "bottom";
 }
 
+.wrapper {
+  display: grid;
+  grid-auto-flow: column dense;  /* or 'row dense', 'column', 'column dense' */
+  grid-gap: 10px;
+  grid-template-areas: "top"
+  "list"
+  "charts"
+  "bottom";
+  grid-template-columns: 50% 50%;
+}
+
 @media (min-width: 500px) {
   .wrapper {
     grid-auto-flow: row dense;
@@ -27,9 +38,7 @@
 }
 
 .top {
-  display: grid;
   grid-area: top;
-  grid-template-columns: 1fr 1fr;
 }
 
 .entryList {
