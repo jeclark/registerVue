@@ -1,9 +1,9 @@
 <template>
   <li class="entryItem">
         <div class="itemOptions">
-          <button class="fa fa-pencil itemEdit" aria-hidden="true"></button>
-          <button class="fa fa-times itemEdit" aria-hidden="true"></button>
-          <button class="fa fa-check itemEdit" aria-hidden="true"></button>
+          <button class="fa fa-pencil itemEdit" aria-hidden="true" v-on:click="editEntry" :value="entryitem.id"></button>
+          <button class="fa fa-times itemEdit" aria-hidden="true" v-on:click="deleteEntry" :value="entryitem.id"></button>
+          <button class="fa fa-check itemEdit" aria-hidden="true" v-on:click="clearEntry" :value="entryitem.id"></button>
         </div>
         <div class="entryName">{{ entryitem.payee }}</div>
         <div class="entryAmount">${{ entryitem.amount }}</div>
@@ -14,7 +14,18 @@
 
 <script>
 export default {
-  props: ['entryitem']
+  props: ['entryitem'],
+  methods: {
+    editEntry: function(evt) {
+      console.log('called editEntry with ', evt.target.value);
+    },
+    deleteEntry: function(evt) {
+      console.log('called deleteEntry with ', evt.target.value);
+    },
+    clearEntry: function(evt) {
+      console.log('called clearEntry with ', evt.target.value);
+    }
+  }
 };
 </script>
 
