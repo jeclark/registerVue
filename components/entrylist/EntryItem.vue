@@ -1,20 +1,20 @@
 <template>
-  <li className={"entryItem "}>
-        <div className="itemOptions">
+  <li class="entryItem">
+        <div class="itemOptions">
           <button
-            className="fa fa-pencil itemEdit"
+            class="fa fa-pencil itemEdit"
             aria-hidden="true"></button>
           <button
-            className="fa fa-times itemEdit"
+            class="fa fa-times itemEdit"
             aria-hidden="true"></button>
           <button
-            className={"fa fa-check itemEdit"}
+            class="fa fa-check itemEdit"
             aria-hidden="true"></button>
         </div>
-        <div className="entryName">Payee</div>
-        <div className="entryAmount">$Amount</div>
-        <div className="entryDate">Date </div>
-        <div className="entryTags">tags</div>
+        <div class="entryName">Payee</div>
+        <div class="entryAmount">$Amount</div>
+        <div class="entryDate">Date </div>
+        <div class="entryTags">tags</div>
       </li>
 </template>
 

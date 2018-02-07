@@ -4,7 +4,6 @@
     <EntryList/>
     <Charts/>
     <Bottom/>
-    foo
   </div>
 </template>
 

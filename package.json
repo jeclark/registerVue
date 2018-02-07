@@ -18,8 +18,7 @@
     "> 1%",
     "last 2 versions"
   ],
-  "lint-staged": {
-  },
+  "lint-staged": {},
   "jest": {
     "moduleNameMapper": {
       "^vue$": "vue/dist/vue.common.js",
@@ -36,7 +35,8 @@
     }
   },
   "dependencies": {
-    "nuxt": "^1.0.0-rc11"
+    "nuxt": "^1.0.0-rc11",
+    "postcss-nested": "^3.0.0"
   },
   "devDependencies": {
     "@storybook/vue": "^3.2.13",
