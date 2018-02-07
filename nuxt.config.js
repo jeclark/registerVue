@@ -46,6 +46,7 @@ module.exports = {
         content: '12ftguru Vue Starter'
       }
     ],
+    css: ['font-awesome/css/font-awesome.css'],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*
