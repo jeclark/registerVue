@@ -26,12 +26,12 @@
     "linters": {
       "*.js": [
         "node ./util/prettier_css.js",
-        "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+        "eslint --ext .js,.vue --ignore-path .gitignore .",
         "git add"
       ],
       "*.vue": [
         "node ./util/prettier_css.js",
-        "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+        "eslint --ext .js,.vue --ignore-path .gitignore .",
         "git add"
       ],
       "*.css": [
