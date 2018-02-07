@@ -4081,6 +4081,10 @@ he@1.1.x, he@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+highcharts@^6.0.6:
+  version "6.0.6"
+  resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-6.0.6.tgz#c896ece8cdbab18b4f8b7b33ab9647aa7150c510"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -8851,6 +8855,10 @@ vm-browserify@0.0.4:
 vue-class-component@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-6.0.0.tgz#abb87f0acdc77428973401ca3bfaae133c826432"
+
+vue-highcharts@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/vue-highcharts/-/vue-highcharts-0.0.10.tgz#a4b90098ede77a65cca87e62bed87549e1e1c985"
 
 vue-hot-reload-api@^2.1.1:
   version "2.2.0"

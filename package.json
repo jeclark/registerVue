@@ -35,8 +35,10 @@
     }
   },
   "dependencies": {
+    "highcharts": "^6.0.6",
     "nuxt": "^1.0.0-rc11",
-    "postcss-nested": "^3.0.0"
+    "postcss-nested": "^3.0.0",
+    "vue-highcharts": "^0.0.10"
   },
   "devDependencies": {
     "@storybook/vue": "^3.2.13",
