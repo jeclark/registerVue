@@ -12,8 +12,8 @@ const createStore = () => {
     },
     getters: {
       sorted_entries(state) {
-        const sortedEntries = state.entries.reverse();
-        return sortedEntries;
+        var sortedEntries = state.entries;
+        return sortedEntries.reverse();
       }
     }
   });

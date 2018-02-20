@@ -16,10 +16,9 @@ import axios from 'axios';
 
 console.log('You are Here!');
 export default {
-  fetch({ store, params }) {
-    return axios.get('http://simple-rest-api.dev/api/entry/').then(res => {
-      store.commit('SET_ENTRIES', res.data);
-    });
+  async fetch({ store, params }) {
+    let { data } = await axios.get('http://simple-rest-api.dev/api/entry/');
+    store.commit('SET_ENTRIES', data);
   },
   components: {
     Bottom,
