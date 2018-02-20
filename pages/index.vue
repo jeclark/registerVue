@@ -12,14 +12,31 @@ import Bottom from '~/components/bottom/Bottom.vue';
 import Charts from '~/components/charts/Charts.vue';
 import EntryList from '~/components/entrylist/EntryList.vue';
 import Top from '~/components/top/Top.vue';
+import axios from 'axios';
 
 console.log('You are Here!');
 export default {
+  fetch({ store, params }) {
+    return axios.get('http://simple-rest-api.dev/api/entry/').then(res => {
+      store.commit('SET_ENTRIES', res.data);
+    });
+  },
   components: {
     Bottom,
     Charts,
     EntryList,
     Top
+  },
+  methods: {
+    fetchEntries: function() {
+      console.log('Called fetchEntries');
+    },
+    fetchTotals: function() {
+      console.log('Called fetchTotals');
+    },
+    fetchCharts: function() {
+      console.log('Called fetchEntries');
+    }
   }
 };
 </script>

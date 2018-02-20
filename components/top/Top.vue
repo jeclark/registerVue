@@ -45,6 +45,11 @@
           </label>
       </div>
     </div>
+    <div class="field">
+      <div class="control">
+        <button class="itemSave" aria-hidden="true" v-on:click="saveEntry">Save</button>
+      </div>
+    </div>
   </section>
 </div>
 </template>
@@ -62,6 +67,13 @@ export default {
         cleared: false
       }
     };
+  },
+  methods: {
+    saveEntry: function(evt) {
+      console.log('called saveEntry with ', evt);
+      // grab the values
+      // Save or update depending on id value
+    }
   }
 };
 </script>
@@ -83,6 +95,17 @@ export default {
       margin-top: 0;
       padding: 0;
       font-size: 14px;
+      .itemSave {
+        padding: 5px 10px;
+        font-size: 16px;
+        margin-left: 20px;
+        border-radius: 5px;
+        background-color: #d1d1d1;
+        border: 1px solid #505050;
+        .fa-save:before, .fa-floppy-o:before {
+          margin-right: 10px;
+        }
+      }
     }
   }
 }

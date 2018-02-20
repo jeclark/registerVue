@@ -7,8 +7,8 @@
         </div>
         <div class="entryName">{{ entryitem.payee }}</div>
         <div class="entryAmount">${{ entryitem.amount }}</div>
-        <div class="entryDate">{{ entryitem.date }} </div>
-        <div class="entryTags">{{ entryitem.tags }}</div>
+        <div class="entryDate">{{ entryitem.createdate }} </div>
+        <div class="entryTags">{{ entryitem.tag }}</div>
       </li>
 </template>
 
@@ -18,12 +18,18 @@ export default {
   methods: {
     editEntry: function(evt) {
       console.log('called editEntry with ', evt.target.value);
+      // grab the values
+      // populate the fields
     },
     deleteEntry: function(evt) {
       console.log('called deleteEntry with ', evt.target.value);
+      // prompt for confirmation
+      // delete or cancel based on response
     },
     clearEntry: function(evt) {
       console.log('called clearEntry with ', evt.target.value);
+      // toggle the cleared status of the entry
+      // and save
     }
   }
 };
