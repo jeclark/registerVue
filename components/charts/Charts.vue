@@ -13,40 +13,35 @@ export default {
     return {
       options: {
         chart: {
-          type: 'bar'
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          type: 'pie'
         },
         title: {
-          text: 'Stacked bar chart'
+          text: 'Spending by Type in the Past 30 Days'
         },
-        xAxis: {
-          categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-        },
-        yAxis: {
-          min: 0,
-          title: {
-            text: 'Total fruit consumption'
-          }
-        },
-        legend: {
-          reversed: true
+        tooltip: {
+          pointFormat: '<b>$ {point.y:.2f}</b>'
         },
         plotOptions: {
-          series: {
-            stacking: 'normal'
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              format: '<b>{point.name}</b>: {point.percentage:.1f}%',
+              style: {
+                color: 'black'
+              }
+            }
           }
         },
         series: [
           {
-            name: 'John',
-            data: [5, 3, 4, 7, 2]
-          },
-          {
-            name: 'Jane',
-            data: [2, 2, 3, 2, 1]
-          },
-          {
-            name: 'Joe',
-            data: [3, 4, 4, 2, 5]
+            name: 'Expense',
+            colorByPoint: true,
+            data: this.$store.getters.get_pie
           }
         ]
       }

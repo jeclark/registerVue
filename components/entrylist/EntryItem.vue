@@ -1,13 +1,13 @@
 <template>
-  <li class="entryItem">
+  <li class="entryItem" :class="entryitem.type">
         <div class="itemOptions">
           <button class="fa fa-pencil itemEdit" aria-hidden="true" v-on:click="editEntry" :value="entryitem.id"></button>
           <button class="fa fa-times itemEdit" aria-hidden="true" v-on:click="deleteEntry" :value="entryitem.id"></button>
-          <button class="fa fa-check itemEdit" aria-hidden="true" v-on:click="clearEntry" :value="entryitem.id"></button>
+          <button class="fa fa-check itemEdit" v-bind:class="{ cleared: parseFloat(entryitem.cleared) }" aria-hidden="true" v-on:click="clearEntry" :value="entryitem.id"></button>
         </div>
         <div class="entryName">{{ entryitem.payee }}</div>
-        <div class="entryAmount">${{ entryitem.amount }}</div>
-        <div class="entryDate">{{ entryitem.createdate }} </div>
+        <div class="entryAmount">${{ Math.abs(entryitem.amount).toFixed(2) }}</div>
+        <div class="entryDate">{{ entryitem.entrydate }} </div>
         <div class="entryTags">{{ entryitem.tag }}</div>
       </li>
 </template>

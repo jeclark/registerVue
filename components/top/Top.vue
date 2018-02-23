@@ -1,56 +1,58 @@
 <template>
 <div class="top">
-  <section class="form">
-    <div class="field">
-      <label class="label">Payee</label>
-      <div class="control">
-        <input v-model="form.payee" class="input" type="text">
+  <form v-on:submit.prevent="saveEntry">
+    <section class="form">
+      <div class="field">
+        <label class="label">Payee</label>
+        <div class="control">
+          <input v-model="form.payee" class="input" type="text">
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label">Amount</label>
-      <div class="control">
-        <input v-model="form.amount" class="input" type="text">
+      <div class="field">
+        <label class="label">Amount</label>
+        <div class="control">
+          <input v-model="form.amount" class="input" type="text">
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label">Date</label>
-      <div class="control">
-        <input v-model="form.date" class="input" type="text">
+      <div class="field">
+        <label class="label">Date</label>
+        <div class="control">
+          <input v-model="form.date" class="input" type="text">
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label">Tags</label>
-      <div class="control">
-        <input v-model="form.tags" class="input" type="text">
+      <div class="field">
+        <label class="label">Tags</label>
+        <div class="control">
+          <input v-model="form.tags" class="input" type="text">
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <div class="control">
-        <label class="radio">
-            <input v-model="form.type" type="radio" value="credit">
-            Credit
-          </label>
-        <label class="radio">
-            <input v-model="form.type" type="radio" value="debit">
-            Debit
-          </label>
+      <div class="field">
+        <div class="control">
+          <label class="radio">
+              <input v-model="form.type" type="radio" value="credit">
+              Credit
+            </label>
+          <label class="radio">
+              <input v-model="form.type" type="radio" value="debit">
+              Debit
+            </label>
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <div class="control">
-        <label class="checkbox">
-            <input type="checkbox" v-model="form.cleared">
-            Cleared?
-          </label>
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+              <input type="checkbox" v-model="form.cleared">
+              Cleared?
+            </label>
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <div class="control">
-        <button class="itemSave" aria-hidden="true" v-on:click="saveEntry">Save</button>
+      <div class="field">
+        <div class="control">
+          <button class="itemSave" aria-hidden="true">Submit</button>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </form>
 </div>
 </template>
 
@@ -70,7 +72,15 @@ export default {
   },
   methods: {
     saveEntry: function(evt) {
-      console.log('called saveEntry with ', evt);
+      console.log('target is: ', evt.target);
+      console.log('data is: ', this.form.payee);
+      console.log(
+        'called saveEntry with ',
+        evt,
+        this.form,
+        this.form.length,
+        this.form.payee
+      );
       // grab the values
       // Save or update depending on id value
     }
