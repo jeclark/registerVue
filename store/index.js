@@ -7,6 +7,11 @@ const createStore = () => {
       entries: [],
       lineData: []
     },
+    actions: {
+      load_entries(context) {
+        console.log('got called');
+      }
+    },
     mutations: {
       SET_ENTRIES(state, data) {
         state.entries = data;

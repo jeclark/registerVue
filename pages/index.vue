@@ -17,8 +17,18 @@ import axios from 'axios';
 console.log('You are Here!');
 export default {
   async fetch({ store, params }) {
-    let { data } = await axios.get('http://simple-rest-api.dev/api/entry/');
-    store.commit('SET_ENTRIES', data);
+    return axios
+      .get('http://simple-rest-api.dev/api/entry/')
+      .then(data => {
+        store.commit('SET_ENTRIES', data.data);
+        return axios.get(
+          'http://simple-rest-api.dev/api/entry/getTotalsByMonth'
+        ); // using response.data
+      })
+      .then(data => {
+        store.commit('SET_LINE_DATA', data.data);
+        console.log('Response', data);
+      });
   },
   components: {
     Bottom,
