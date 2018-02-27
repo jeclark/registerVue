@@ -7,8 +7,13 @@
 <script>
 import Vue from 'vue';
 import VueHighcharts from 'vue-highcharts';
+import { mapGetters, mapActions } from 'vuex';
 Vue.use(VueHighcharts);
 export default {
+  computed: mapGetters({
+    pie: 'get_pie',
+    lines: 'get_lines'
+  }),
   data() {
     return {
       options: {
@@ -46,6 +51,10 @@ export default {
         ]
       }
     };
+  },
+  created() {
+    // console.log('store is ', this.$store);
+    this.$store.dispatch('modules/charts/getLineData');
   }
 };
 </script>

@@ -16,36 +16,11 @@ import axios from 'axios';
 
 console.log('You are Here!');
 export default {
-  async fetch({ store, params }) {
-    return axios
-      .get('http://simple-rest-api.dev/api/entry/')
-      .then(data => {
-        store.commit('SET_ENTRIES', data.data);
-        return axios.get(
-          'http://simple-rest-api.dev/api/entry/getTotalsByMonth'
-        ); // using response.data
-      })
-      .then(data => {
-        store.commit('SET_LINE_DATA', data.data);
-        console.log('Response', data);
-      });
-  },
   components: {
     Bottom,
     Charts,
     EntryList,
     Top
-  },
-  methods: {
-    fetchEntries: function() {
-      console.log('Called fetchEntries');
-    },
-    fetchTotals: function() {
-      console.log('Called fetchTotals');
-    },
-    fetchCharts: function() {
-      console.log('Called fetchEntries');
-    }
   }
 };
 </script>
