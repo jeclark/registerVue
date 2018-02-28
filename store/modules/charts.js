@@ -1,10 +1,10 @@
 import axios from 'axios';
 import moment from 'moment';
 
-const state = {
+export const state = () => ({
   pieData: [],
   entries: []
-};
+});
 // getters
 const getters = {
   get_pie(state) {
@@ -64,6 +64,7 @@ const mutations = {
 };
 
 export default {
+  state,
   getters,
   actions,
   mutations

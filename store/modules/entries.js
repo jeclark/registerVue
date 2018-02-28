@@ -1,12 +1,12 @@
 import axios from 'axios';
 // initial state
-const state = {
+export const state = () => ({
   entries: []
-};
+});
 
 // getters
 const getters = {
-  return_sorted_entries: state => {
+  return_sorted_entries: (state, getters) => {
     // this really should be a date sort
     // console.log('return_sorted_entries state is ', state.entries);
     if (state.entries !== undefined) {
@@ -19,9 +19,9 @@ const getters = {
       return [];
     }
   },
-  return_total: state => {
-    // console.log('return_total state is ', state);
-    if (state.entries !== undefined) {
+  return_total: (state, getters) => {
+    console.log('return_total state is ', state.entries);
+    if (state.entries !== undefined && state.entries.length > 0) {
       // console.log('Got entries!');
       var total = parseFloat(state.entries[0].amount);
       state.entries.reduce(function(entries, entry) {
@@ -33,9 +33,9 @@ const getters = {
       return 0;
     }
   },
-  return_cleared_total: state => {
-    // console.log('return_cleared_total state is ', state);
-    if (state.entries !== undefined) {
+  return_cleared_total: (state, getters) => {
+    console.log('return_cleared_total state is ', state.entries);
+    if (state.entries !== undefined && state.entries.length > 0) {
       var total = parseFloat(state.entries[0].amount);
       state.entries.reduce(function(entries, entry) {
         if (entry.cleared === '1') {
@@ -70,6 +70,7 @@ const mutations = {
 };
 
 export default {
+  state,
   getters,
   actions,
   mutations
