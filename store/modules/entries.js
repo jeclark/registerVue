@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 // initial state
 export const state = () => ({
   entries: []
@@ -13,14 +14,14 @@ const getters = {
       var sortedEntries = state.entries.slice(
         Math.max(state.entries.length - 100, 1)
       );
-      console.log('sorted entries are ', sortedEntries.reverse());
+      // console.log('sorted entries are ', sortedEntries.reverse());
       return sortedEntries.reverse();
     } else {
       return [];
     }
   },
   return_total: (state, getters) => {
-    console.log('return_total state is ', state.entries);
+    // console.log('return_total state is ', state.entries);
     if (state.entries !== undefined && state.entries.length > 0) {
       // console.log('Got entries!');
       var total = parseFloat(state.entries[0].amount);
@@ -34,7 +35,7 @@ const getters = {
     }
   },
   return_cleared_total: (state, getters) => {
-    console.log('return_cleared_total state is ', state.entries);
+    // console.log('return_cleared_total state is ', state.entries);
     if (state.entries !== undefined && state.entries.length > 0) {
       var total = parseFloat(state.entries[0].amount);
       state.entries.reduce(function(entries, entry) {
@@ -46,6 +47,38 @@ const getters = {
     } else {
       return 0;
     }
+  },
+  get_pie(state, getters) {
+    var pieData = [];
+    var outputData = [];
+    var pastMonth = moment()
+      .subtract(30, 'days')
+      .format('YYYY-MM-DD');
+    console.log('get_pie and entries are ', state.entries);
+    if (state.entries.length > 0) {
+      state.entries.reduce(function(entries, entry) {
+        if (
+          entry.tag != null &&
+          entry.entrydate >= pastMonth &&
+          entry.type === 'debit'
+        ) {
+          if (pieData[entry.tag] === undefined) {
+            pieData[entry.tag] = Math.abs(parseFloat(entry.amount));
+          } else {
+            // console.log(pieData[entry.tag]);
+            pieData[entry.tag] =
+              pieData[entry.tag] + Math.abs(parseFloat(entry.amount));
+          }
+        }
+      });
+    }
+    for (var key in pieData) {
+      outputData.push({
+        name: key,
+        y: pieData[key]
+      });
+    }
+    return outputData;
   }
 };
 
