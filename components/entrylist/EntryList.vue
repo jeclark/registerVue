@@ -29,10 +29,6 @@ export default {
   },
   components: {
     EntryItem
-  },
-  created() {
-    // console.log('store is ', this.$store);
-    this.$store.dispatch('modules/entries/getAllEntries');
   }
 };
 </script>

@@ -16,6 +16,13 @@ import axios from 'axios';
 
 console.log('You are Here!');
 export default {
+  async fetch({ store, params }) {
+    console.log('firing fetch');
+    await axios.get('http://simple-rest-api.dev/api/entry/').then(resp => {
+      store.commit('modules/entries/SET_ENTRIES', resp.data); // using response.data
+      console.log('commit fired');
+    });
+  },
   components: {
     Bottom,
     Charts,

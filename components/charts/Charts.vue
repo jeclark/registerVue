@@ -90,12 +90,12 @@ export default {
           verticalAlign: 'middle',
           borderWidth: 0
         },
-        series: this.$store.getters['modules/charts/get_lines']
+        series: this.getLines
       }
     };
   },
   created() {
-    this.$store.dispatch('modules/charts/getLineData');
+    console.log('Calling getLineData in created', this.data);
   }
 };
 </script>

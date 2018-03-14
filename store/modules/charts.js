@@ -23,12 +23,12 @@ const getters = {
 const actions = {
   async getLineData({ commit }) {
     commit('SET_LAST_TWELVE_MONTHS');
-    axios
+    await axios
       .get('http://simple-rest-api.dev/api/entry/getTotalsByMonth', {
         crossdomain: true
       })
       .then(data => {
-        // console.log('getLineData with ', data.data);
+        console.log('getLineData with ', data.data);
         var checkTag = '';
         var outputArray = [];
         var tempData = [];

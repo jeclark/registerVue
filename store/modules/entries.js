@@ -49,10 +49,11 @@ const getters = {
     }
   },
   get_pie(state, getters) {
+    // console.trace();
     var pieData = [];
     var outputData = [];
     var pastMonth = moment()
-      .subtract(30, 'days')
+      .subtract(90, 'days')
       .format('YYYY-MM-DD');
     console.log('get_pie and entries are ', state.entries);
     if (state.entries.length > 0) {
@@ -78,20 +79,21 @@ const getters = {
         y: pieData[key]
       });
     }
+    console.log('output data is ', outputData);
     return outputData;
   }
 };
 
 // actions
-const actions = {
-  getAllEntries({ commit }) {
-    // console.log('called getAllEntries');
-    axios.get('http://simple-rest-api.dev/api/entry/').then(resp => {
-      // console.log('getAllEntries and data is ', resp.data);
-      commit('SET_ENTRIES', resp.data); // using response.data
-    });
-  }
-};
+// const actions = {
+//   async getAllEntries({ commit }) {
+//     // console.log('called getAllEntries');
+//     await axios.get('http://simple-rest-api.dev/api/entry/').then(resp => {
+//       // console.log('getAllEntries and data is ', resp.data);
+//       commit('SET_ENTRIES', resp.data); // using response.data
+//     });
+//   }
+// };
 
 // mutations
 const mutations = {
@@ -105,6 +107,5 @@ const mutations = {
 export default {
   state,
   getters,
-  actions,
   mutations
 };
