@@ -13,15 +13,31 @@ import Charts from '~/components/charts/Charts.vue';
 import EntryList from '~/components/entrylist/EntryList.vue';
 import Top from '~/components/top/Top.vue';
 import axios from 'axios';
+import https from 'https';
 
 console.log('You are Here!');
 export default {
   async fetch({ store, params }) {
     console.log('firing fetch');
-    await axios.get('http://simple-rest-api.dev/api/entry/').then(resp => {
-      store.commit('modules/entries/SET_ENTRIES', resp.data); // using response.data
-      console.log('commit fired');
+    const instance = axios.create({
+      httpsAgent: new https.Agent({
+        rejectUnauthorized: false
+      })
     });
+    console.log('called getLineData');
+    await instance
+      .get('https://simple-rest-api.12.ft/api/entry/getTotalsByMonth/')
+      .then(resp => {
+        console.log('getTotalsByMonth returned ', resp.data);
+        store.commit('modules/charts/SET_LAST_TWELVE_MONTHS');
+        store.commit('modules/charts/SET_LINE_DATA', resp.data);
+      });
+    await instance
+      .get('https://simple-rest-api.12.ft/api/entry/')
+      .then(resp => {
+        console.log('entry returned ', resp.data);
+        store.commit('modules/entries/SET_ENTRIES', resp.data);
+      });
   },
   components: {
     Bottom,

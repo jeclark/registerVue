@@ -79,7 +79,7 @@ const getters = {
         y: pieData[key]
       });
     }
-    console.log('output data is ', outputData);
+    // console.log('output data is ', outputData);
     return outputData;
   }
 };

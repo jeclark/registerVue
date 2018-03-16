@@ -11,20 +11,6 @@ import VueHighcharts from 'vue-highcharts';
 import { mapGetters, mapActions } from 'vuex';
 Vue.use(VueHighcharts);
 export default {
-  computed: {
-    getPie() {
-      console.log('called getPie');
-      return this.$store.getters['modules/entries/get_pie'];
-    },
-    getLines() {
-      console.log('called getLines');
-      return this.$store.getters['modules/charts/get_lines'];
-    },
-    getMonths() {
-      console.log('called getMonths');
-      return this.$store.getters['modules/charts/get_last_12_months'];
-    }
-  },
   data() {
     return {
       options: {
@@ -67,7 +53,7 @@ export default {
           x: -20
         },
         xAxis: {
-          categories: this.$store.getters['modules/charts/get_last_12_months']
+          categories: this.$store.getters['modules/charts/get_months']
         },
         yAxis: {
           title: {
@@ -90,12 +76,9 @@ export default {
           verticalAlign: 'middle',
           borderWidth: 0
         },
-        series: this.getLines
+        series: this.$store.getters['modules/charts/get_lines']
       }
     };
-  },
-  created() {
-    console.log('Calling getLineData in created', this.data);
   }
 };
 </script>
