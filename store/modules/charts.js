@@ -18,8 +18,8 @@ export const state = () => ({
 // getters
 const getters = {
   get_lines(state, getters) {
-    console.log('called get_lines with months', state.last12months);
-    console.log('called get_lines with state', state.lineData);
+    // console.log('called get_lines with months', state.last12months);
+    // console.log('called get_lines with state', state.lineData);
     var checkTag = '';
     var outputArray = [];
     var tempData = [];
@@ -30,7 +30,7 @@ const getters = {
     // loop through catList
     state.catList.forEach(function(category) {
       tempData[category] = [];
-      console.log('tempData is ', tempData);
+      // console.log('tempData is ', tempData);
       // loop through the last 12 months
       state.last12months.forEach(function(eachMonth) {
         var data = lodash.find(state.lineData, function(obj) {
@@ -43,7 +43,7 @@ const getters = {
           tempData[category].push(0);
         }
       });
-      console.log('for category this is tempData', category, tempData);
+      // console.log('for category this is tempData', category, tempData);
     });
     // at the end of the loop we add things to our outputArray
     for (var key in tempData) {

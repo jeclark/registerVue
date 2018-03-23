@@ -13,11 +13,15 @@
 </template>
 
 <script>
+import lodash from 'lodash';
+import EventBus from '~/components/EventBus.vue';
 export default {
   props: ['entryitem'],
   methods: {
     editEntry: function(evt) {
+      EventBus.$emit('edit', this.entryitem);
       console.log('called editEntry with ', evt.target.value);
+      console.log('entryItem is ', this.entryitem);
       // grab the values
       // populate the fields
     },
@@ -28,6 +32,7 @@ export default {
     },
     clearEntry: function(evt) {
       console.log('called clearEntry with ', evt.target.value);
+      EventBus.$emit('clear', this.entryitem);
       // toggle the cleared status of the entry
       // and save
     }
