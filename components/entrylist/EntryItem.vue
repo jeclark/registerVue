@@ -15,26 +15,59 @@
 <script>
 import lodash from 'lodash';
 import EventBus from '~/components/EventBus.vue';
+import axios from 'axios';
+import https from 'https';
 export default {
   props: ['entryitem'],
   methods: {
     editEntry: function(evt) {
-      EventBus.$emit('edit', this.entryitem);
+      EventBus.$emit('edit', this.entryitem); // this gets caught by Top.vue
       console.log('called editEntry with ', evt.target.value);
       console.log('entryItem is ', this.entryitem);
-      // grab the values
-      // populate the fields
     },
     deleteEntry: function(evt) {
-      console.log('called deleteEntry with ', evt.target.value);
-      // prompt for confirmation
-      // delete or cancel based on response
+      var me = this;
+      console.log('firing deleteEntry with ', me.entryitem);
+      // warn user
+      var result = confirm(
+        'Do you want to delete this entry for ' + me.entryitem.payee + '?'
+      );
+      if (result === true) {
+        console.log('Result and entry', result, me.entryitem);
+        const instance = axios.create({
+          httpsAgent: new https.Agent({
+            rejectUnauthorized: false
+          })
+        });
+        // send delete to the server
+        var formData = {
+          id: me.entryitem.id
+        };
+
+        instance({
+          method: 'delete',
+          url: 'https://simple-rest-api.12.ft/api/entry',
+          data: formData
+        })
+          .then(function(response) {
+            // it worked!
+            me.$store.commit('modules/entries/DELETE_ENTRY', formData);
+            // TODO: Update graphs with new data
+          })
+          .catch(function(response) {
+            // stuff broke - handle error
+            console.log(response);
+          });
+        // on success, send the event
+        EventBus.$emit('delete', this.entryitem);
+      } // else we do nothing
     },
     clearEntry: function(evt) {
-      console.log('called clearEntry with ', evt.target.value);
+      console.log('firing a clear event with ', this.entryitem);
+      console.log('store state is ', this.$store.state.modules.entries.entries);
+      // send clear to the server
+      // on success, send the event
       EventBus.$emit('clear', this.entryitem);
-      // toggle the cleared status of the entry
-      // and save
     }
   }
 };
@@ -87,6 +120,11 @@ li.entryItem {
       width: 34px;
       height: 34px;
       font-size: 21px;
+      &:focus {
+        outline-style: none;
+        background-color: #409646;
+        color: yellow;
+      }
       &.cleared {
         background-color: #409646;
         color: white;

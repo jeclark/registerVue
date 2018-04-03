@@ -17,13 +17,13 @@
       <div class="field">
         <label class="label">Date</label>
         <div class="control">
-          <input v-model="form.date" class="input" type="text">
+          <input v-model="form.entrydate" class="input" type="text">
         </div>
       </div>
       <div class="field">
         <label class="label">Tags</label>
         <div class="control">
-          <input v-model="form.tags" class="input" type="text">
+          <input v-model="form.tag" class="input" type="text">
         </div>
       </div>
       <div class="field">
@@ -54,11 +54,14 @@
       </div>
     </section>
   </form>
+  <button class="itemSave" aria-hidden="true" v-on:click="clearForm">Clear Form</button>
 </div>
 </template>
 
 <script>
 import EventBus from '~/components/EventBus.vue';
+import axios from 'axios';
+import https from 'https';
 export default {
   data() {
     return {
@@ -66,8 +69,8 @@ export default {
         id: '',
         payee: '',
         amount: '',
-        date: '',
-        tags: '',
+        entrydate: '',
+        tag: '',
         type: 'debit',
         cleared: false
       }
@@ -78,47 +81,95 @@ export default {
     var me = this;
     var setCleared = false;
     EventBus.$on('edit', function(entry) {
-      // console.log('entry is ', entry);
-      // console.log('me is ', me);
-      // console.log('form is ', me.form);
+      // start listening for edit events and run the function
+      // we got an edit event and an entry item from the event bus
+      // set the state which updates the form fields
       me.form.id = entry.id;
       me.form.payee = entry.payee;
-      me.form.amount = entry.amount;
-      me.form.date = entry.entrydate;
-      me.form.tags = entry.tag;
+      me.form.amount = Math.abs(entry.amount);
+      me.form.entrydate = entry.entrydate;
+      me.form.tag = entry.tag;
       me.form.type = entry.type;
       if (entry.cleared === '1') {
         var setCleared = true;
       }
       me.form.cleared = setCleared;
     });
-    EventBus.$on('clear', function(entry) {
-      console.log('entry is ', entry);
-    });
   },
   methods: {
     saveEntry: function(evt) {
-      console.log('evt is: ', evt);
-      console.log('target is: ', evt.target);
-      console.log('id is: ', this.form.id);
-      console.log('payee is: ', this.form.payee);
-      console.log('amount is: ', this.form.amount);
-      console.log('date is: ', this.form.date);
-      console.log('tags is: ', this.form.tags);
-      console.log('type is: ', this.form.type);
-      console.log('cleared is: ', this.form.cleared);
-      // grab the values
-      // Save or update depending on id value
+      var cleared = 0;
+      var method = '';
+      var me = this;
+      const instance = axios.create({
+        httpsAgent: new https.Agent({
+          rejectUnauthorized: false
+        })
+      });
+      // console.log('id is: ', this.form.id);
+      if (me.form.id !== '') {
+        method = 'put';
+      } else {
+        method = 'post';
+      }
+      if (me.form.cleared === true) {
+        cleared = 1;
+      }
+      var formData = {
+        id: me.form.id,
+        payee: me.form.payee,
+        amount: me.form.amount,
+        entrydate: me.form.entrydate,
+        tag: me.form.tag,
+        type: me.form.type,
+        cleared: cleared
+      };
+
+      instance({
+        method: method,
+        url: 'https://simple-rest-api.12.ft/api/entry',
+        data: formData
+      })
+        .then(function(response) {
+          // it worked!
+          if (me.form.id !== '') {
+            console.log('This is an edit of id: ', me.form.id);
+            me.$store.commit('modules/entries/UPDATE_ENTRY', formData);
+          } else {
+            console.log('This is a new entry');
+            console.log('response is ', response.data.data[0]);
+            formData.id = response.data.data[0].id;
+            me.$store.commit('modules/entries/INSERT_ENTRY', formData);
+          }
+          // clear the form values
+          me.clearForm();
+          // TODO: Update graphs with new data
+        })
+        .catch(function(response) {
+          // stuff broke - handle error
+          console.log(response);
+        });
     },
     setEdit: function(entry) {
       console.log('called setValue with ', entry);
       this.state.form.id = entry.id;
       this.state.form.payee = entry.payee;
       this.state.form.amount = entry.amount;
-      this.state.form.date = entry.date;
-      this.state.form.tags = entry.tags;
+      this.state.form.date = entry.entrydate;
+      this.state.form.tag = entry.tag;
       this.state.form.type = entry.type;
       this.state.form.cleared = entry.cleared;
+    },
+    clearForm: function() {
+      // console.log('state is ', this.state);
+      // console.log('store is ', this.$store.state.modules.entries.entries);
+      this.form.id = '';
+      this.form.payee = '';
+      this.form.amount = '';
+      this.form.entrydate = '';
+      this.form.tag = '';
+      this.form.type = 'debit';
+      this.form.cleared = false;
     }
   }
 };

@@ -39,11 +39,6 @@ export default {
         store.commit('modules/entries/SET_ENTRIES', resp.data);
       });
   },
-  methods: {
-    handleEdit: function(entryItem) {
-      console.log('called handleEdit with ', entryItem);
-    }
-  },
   components: {
     Bottom,
     Charts,

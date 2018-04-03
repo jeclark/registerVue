@@ -9,8 +9,8 @@ Vue.use(Vuex);
 const createStore = () => {
   return new Vuex.Store({
     modules: {
-      entries,
-      charts
+      entries: entries,
+      charts: charts
     }
   });
 };

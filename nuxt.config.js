@@ -47,7 +47,7 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: '12ftguru Vue Starter'
+        content: 'Register Vue App'
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
