@@ -1,12 +1,12 @@
 <template>
   <div class="entryList">
     <div class="total">Total: ${{getTotal}} Cleared Total: ${{getClearedTotal}} Outstanding ${{(getClearedTotal - getTotal).toFixed(2)}}</div>
-      <ul>
-        <EntryItem
-          v-for="item in getEntries"
-          v-bind:entryitem="item"
-          v-bind:key="item.id">
-        </EntryItem>
+        <ul>
+          <EntryItem
+            v-for="item in getEntries"
+            v-bind:entryitem="item"
+            v-bind:key="item.id"></EntryItem>
+        </ul>
       </ul>
   </div>
 </template>

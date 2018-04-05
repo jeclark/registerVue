@@ -1,5 +1,5 @@
 <template>
-  <li class="entryItem" :class="entryitem.type">
+    <li class="entryItem" :class="entryitem.type">
         <div class="itemOptions">
           <button class="fa fa-pencil itemEdit" aria-hidden="true" v-on:click="editEntry" :value="entryitem.id"></button>
           <button class="fa fa-times itemEdit" aria-hidden="true" v-on:click="deleteEntry" :value="entryitem.id"></button>

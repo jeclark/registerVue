@@ -2,15 +2,19 @@
 <div class="charts">
   <highcharts :options="options" ref="highcharts"></highcharts>
   <highcharts :options="options2" ref="highchartsline"></highcharts>
+  <div> {{pieData}} </div>
 </div>
 </template>
 
 <script>
 import Vue from 'vue';
 import VueHighcharts from 'vue-highcharts';
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 Vue.use(VueHighcharts);
 export default {
+  computed: {
+    ...mapState(['pieData'])
+  },
   data() {
     return {
       options: {

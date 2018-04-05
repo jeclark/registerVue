@@ -5,6 +5,43 @@ export const state = () => ({
   entries: []
 });
 
+const computed = {
+  pieData() {
+    // console.trace();
+    var pieData = [];
+    var outputData = [];
+    var pastMonth = moment()
+      .subtract(90, 'days')
+      .format('YYYY-MM-DD');
+    console.log('get_pie and entries are ', this.state.entries);
+    if (this.state.entries.length > 0) {
+      this.state.entries.reduce(function(entries, entry) {
+        if (
+          entry.tag != null &&
+          entry.entrydate >= pastMonth &&
+          entry.type === 'debit'
+        ) {
+          if (pieData[entry.tag] === undefined) {
+            pieData[entry.tag] = Math.abs(parseFloat(entry.amount));
+          } else {
+            // console.log(pieData[entry.tag]);
+            pieData[entry.tag] =
+              pieData[entry.tag] + Math.abs(parseFloat(entry.amount));
+          }
+        }
+      });
+    }
+    for (var key in pieData) {
+      outputData.push({
+        name: key,
+        y: pieData[key]
+      });
+    }
+    console.log('In pieData and output data is ', outputData);
+    return outputData;
+  }
+};
+
 // getters
 const getters = {
   return_sorted_entries: (state, getters) => {
@@ -133,6 +170,7 @@ const mutations = {
 
 export default {
   state,
+  computed,
   getters,
   mutations
 };
