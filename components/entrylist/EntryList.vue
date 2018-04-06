@@ -18,11 +18,12 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   computed: {
     getEntries: function() {
+      var tempEntries = this.$store.state.modules.entries.entries;
       // this really should be a date sort
       // console.log('return_sorted_entries state is ', state.entries);
-      if (this.$store.state.modules.entries.entries !== undefined) {
-        var sortedEntries = this.$store.state.modules.entries.entries.slice(
-          Math.max(this.$store.state.modules.entries.entries.length - 100, 1)
+      if (tempEntries !== undefined) {
+        var sortedEntries = tempEntries.slice(
+          Math.max(tempEntries.length - 100, 1)
         );
         // console.log('sorted entries are ', sortedEntries.reverse());
         return sortedEntries.reverse();

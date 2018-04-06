@@ -23,7 +23,7 @@ export default {
       var pastMonth = moment()
         .subtract(90, 'days')
         .format('YYYY-MM-DD');
-      console.log('pieData and entries are ', startData);
+      // console.log('pieData and entries are ', startData);
       if (startData.length > 0) {
         startData.reduce(function(entries, entry) {
           if (
@@ -58,49 +58,25 @@ export default {
       console.log('lineData and tempEntries are ', tempEntries);
       if (tempEntries.length > 0) {
         this.lineChartCatList.forEach(function(category) {
-          // console.log('category is ', category);
-          var categoryEntries = _.remove(tempEntries, function(entry, index) {
+          console.log('category is ', category);
+          console.log('typeof category is ', typeof category);
+          // initialize an empty year of data
+          var catYearData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+          // tempEntries.forEach(function(entry) {
+          //   if (entry.tag === category) {
+          //     console.log('category is ', category);
+          //   }
+          // });
+          var catAllData = tempEntries.filter(function(entry) {
             return entry.tag === category;
           });
-          // console.log('categoryEntries is ', categoryEntries);
-          // now we have everything in the entries for one category
-          if (categoryEntries.length !== 0) {
-            me.lineChart12months.forEach(function(monthYear) {
-              // console.log('monthYear is ', monthYear);
-              // console.log(
-              //   'categoryEntries[0].date.slice(0, -3) is ',
-              //   categoryEntries[0].entrydate.slice(0, -3)
-              // );
-              lineMonthData = []; // clean out any old crap
-              // is it within the lineChart12months?
-              var entriesForMonth = _.remove(categoryEntries, function(
-                entry,
-                index
-              ) {
-                // console.log('test');
-                return entry.entrydate.slice(0, -3) === monthYear;
-              });
-              // console.log('entriesForMonth is ', entriesForMonth);
-              if (entriesForMonth.length === 0) {
-                lineMonthData.push(0);
-              } else {
-                var total = 0;
-                entriesForMonth.forEach(function(mEntry) {
-                  total += Math.abs(mEntry.amount);
-                });
-                lineMonthData.push(total);
-              }
-              // console.log('lineMonthData is ', lineMonthData);
-            });
-          }
-          // is it in our array of tags we track
-          // if so, what month is it for?
-          // add the absolute value to the entry for that month
+          console.log(catAllData);
         });
       }
     }
   },
   mounted() {
+    // console.log('mounted with ', this.chartEntries);
     var chart = this.$refs.highcharts.chart;
     chart.series[0].setData(this.pieData);
     // EventBus.$on('edit', this.redraw());
