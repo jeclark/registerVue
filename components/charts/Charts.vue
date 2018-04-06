@@ -16,7 +16,7 @@ export default {
   computed: {
     last12months() {
       var today = moment().startOf('month');
-      var pastYear = [today.format('MM YYYY')];
+      var pastYear = [today.format('YYYY-MM')];
       for (var i = 1; i <= 11; i++) {
         pastYear.push(today.subtract(1, 'months').format('YYYY-MM'));
       }
@@ -96,10 +96,11 @@ export default {
     // console.log('mounted with ', this.chartEntries);
     var chart = this.$refs.highcharts.chart;
     chart.series[0].setData(this.pieData);
-    console.log('chart1 is ', chart);
+    console.log('last12months is ', this.last12months);
 
     var chart2 = this.$refs.highchartsline.chart;
     console.log('chart2 is ', chart2.series);
+    chart2.update({ xAxis: { categories: this.last12months } });
     this.lineData.forEach(function(series) {
       if (series.length !== 0) {
         console.log('series.length is ', series, series.name);
