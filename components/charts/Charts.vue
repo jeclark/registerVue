@@ -1,8 +1,7 @@
 <template>
 <div class="charts">
   <highcharts :options="this.options" ref="highcharts"></highcharts>
-  <highcharts :options="options2" ref="highchartsline"></highcharts>
-  <div> {{lineData}} </div>
+  <highcharts :options="this.options2" ref="highchartsline"></highcharts>
 </div>
 </template>
 
@@ -15,6 +14,14 @@ import _ from 'lodash';
 Vue.use(VueHighcharts);
 export default {
   computed: {
+    last12months() {
+      var today = moment().startOf('month');
+      var pastYear = [today.format('MM YYYY')];
+      for (var i = 1; i <= 11; i++) {
+        pastYear.push(today.subtract(1, 'months').format('YYYY-MM'));
+      }
+      return pastYear.reverse();
+    },
     pieData() {
       // console.trace();
       var pieData = [];
@@ -55,38 +62,64 @@ export default {
       var outputData = [];
       var tempEntries = this.chartEntries;
       var me = this;
-      console.log('lineData and tempEntries are ', tempEntries);
+      // console.log('lineData and tempEntries are ', tempEntries);
       if (tempEntries.length > 0) {
         this.lineChartCatList.forEach(function(category) {
-          console.log('category is ', category);
-          console.log('typeof category is ', typeof category);
+          // console.log('category is ', category);
+          // console.log('typeof category is ', typeof category);
           // initialize an empty year of data
           var catYearData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-          // tempEntries.forEach(function(entry) {
-          //   if (entry.tag === category) {
-          //     console.log('category is ', category);
-          //   }
-          // });
           var catAllData = tempEntries.filter(function(entry) {
             return entry.tag === category;
           });
-          console.log(catAllData);
+          // console.log(catAllData);
+          catAllData.forEach(function(entry) {
+            var abrDate = entry.entrydate.slice(0, -3);
+            // console.log('date is ', abrDate);
+            var index = me.last12months.indexOf(abrDate);
+            if (index !== -1) {
+              catYearData[index] = catYearData[index] + Math.abs(entry.amount);
+            }
+          });
+          // console.log('catYearData is ', catYearData);
+          outputData.push({
+            name: category,
+            data: catYearData
+          });
         });
       }
+      console.log('outputData is ', outputData);
+      return outputData;
     }
   },
   mounted() {
     // console.log('mounted with ', this.chartEntries);
     var chart = this.$refs.highcharts.chart;
     chart.series[0].setData(this.pieData);
-    // EventBus.$on('edit', this.redraw());
-    // EventBus.$on('delete', this.redraw());
-    // EventBus.$on('add', this.redraw());
+    console.log('chart1 is ', chart);
+
+    var chart2 = this.$refs.highchartsline.chart;
+    console.log('chart2 is ', chart2.series);
+    this.lineData.forEach(function(series) {
+      if (series.length !== 0) {
+        console.log('series.length is ', series, series.name);
+        chart2.addSeries(
+          { id: series.name, name: series.name, data: series.data },
+          true,
+          true
+        );
+      }
+    });
   },
   methods: {
     redraw() {
       var chart = this.$refs.highcharts.chart;
       chart.series[0].setData(this.pieData);
+
+      var chart2 = this.$refs.highchartsline.chart;
+      console.log('chart2 is ', chart2.series);
+
+      chart2.series[0].setData(this.lineData);
     }
   },
   watch: {
@@ -97,7 +130,6 @@ export default {
   data() {
     return {
       chartEntries: this.$store.state.modules.entries.entries,
-      lineChart12months: this.$store.state.modules.charts.last12months,
       lineChartCatList: this.$store.state.modules.charts.catList,
       options: {
         chart: {
@@ -139,7 +171,7 @@ export default {
           x: -20
         },
         xAxis: {
-          categories: this.$store.getters['modules/charts/get_months']
+          categories: this.last12months
         },
         yAxis: {
           title: {
@@ -161,8 +193,7 @@ export default {
           align: 'right',
           verticalAlign: 'middle',
           borderWidth: 0
-        },
-        series: this.$store.getters['modules/charts/get_lines']
+        }
       }
     };
   }
