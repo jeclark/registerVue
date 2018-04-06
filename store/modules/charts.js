@@ -20,13 +20,8 @@ const getters = {
   get_lines(state, getters) {
     // console.log('called get_lines with months', state.last12months);
     // console.log('called get_lines with state', state.lineData);
-    var checkTag = '';
     var outputArray = [];
     var tempData = [];
-    var range = moment()
-      .startOf('month')
-      .subtract(12, 'months')
-      .format('YYYY-MM');
     // loop through catList
     state.catList.forEach(function(category) {
       tempData[category] = [];
@@ -73,7 +68,7 @@ const mutations = {
     var today = moment().startOf('month');
     var pastYear = [today.format('MM YYYY')];
     for (var i = 1; i <= 11; i++) {
-      pastYear.push(today.subtract(1, 'months').format('MM YYYY'));
+      pastYear.push(today.subtract(1, 'months').format('YYYY-MM'));
     }
     state.last12months = pastYear.reverse();
     console.log('last12months is ', state.last12months);

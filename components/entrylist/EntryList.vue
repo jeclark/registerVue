@@ -17,14 +17,62 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: {
-    getEntries() {
-      return this.$store.getters['modules/entries/return_sorted_entries'];
+    getEntries: function() {
+      // this really should be a date sort
+      // console.log('return_sorted_entries state is ', state.entries);
+      if (this.$store.state.modules.entries.entries !== undefined) {
+        var sortedEntries = this.$store.state.modules.entries.entries.slice(
+          Math.max(this.$store.state.modules.entries.entries.length - 100, 1)
+        );
+        // console.log('sorted entries are ', sortedEntries.reverse());
+        return sortedEntries.reverse();
+      } else {
+        return [];
+      }
     },
-    getClearedTotal() {
-      return this.$store.getters['modules/entries/return_cleared_total'];
+    getTotal: function() {
+      // console.log('return_total state is ', state.entries);
+      if (
+        this.$store.state.modules.entries.entries !== undefined &&
+        this.$store.state.modules.entries.entries.length > 0
+      ) {
+        // console.log('Got entries!');
+        var total = parseFloat(
+          this.$store.state.modules.entries.entries[0].amount
+        );
+        this.$store.state.modules.entries.entries.reduce(function(
+          entries,
+          entry
+        ) {
+          total = total + parseFloat(entry.amount);
+        });
+        return total.toFixed(2);
+      } else {
+        // console.log('No entries! BOOOOOOO!');
+        return 0;
+      }
     },
-    getTotal() {
-      return this.$store.getters['modules/entries/return_total'];
+    getClearedTotal: function() {
+      // console.log('return_cleared_total state is ', state.entries);
+      if (
+        this.$store.state.modules.entries.entries !== undefined &&
+        this.$store.state.modules.entries.entries.length > 0
+      ) {
+        var total = parseFloat(
+          this.$store.state.modules.entries.entries[0].amount
+        );
+        this.$store.state.modules.entries.entries.reduce(function(
+          entries,
+          entry
+        ) {
+          if (entry.cleared === '1') {
+            total = total + parseFloat(entry.amount);
+          }
+        });
+        return total.toFixed(2);
+      } else {
+        return 0;
+      }
     }
   },
   components: {
