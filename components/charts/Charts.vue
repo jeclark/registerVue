@@ -67,10 +67,10 @@ export default {
           if (categoryEntries.length !== 0) {
             me.lineChart12months.forEach(function(monthYear) {
               // console.log('monthYear is ', monthYear);
-              console.log(
-                'categoryEntries[0].date.slice(0, -3) is ',
-                categoryEntries[0].entrydate.slice(0, -3)
-              );
+              // console.log(
+              //   'categoryEntries[0].date.slice(0, -3) is ',
+              //   categoryEntries[0].entrydate.slice(0, -3)
+              // );
               lineMonthData = []; // clean out any old crap
               // is it within the lineChart12months?
               var entriesForMonth = _.remove(categoryEntries, function(

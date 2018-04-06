@@ -23,7 +23,7 @@ export default {
         rejectUnauthorized: false
       })
     });
-    await instance
+    return instance
       .get('https://simple-rest-api.12.ft/api/entry/')
       .then(resp => {
         console.log('fetch entry returned ', resp.data);
