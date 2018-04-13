@@ -15,11 +15,14 @@ Vue.use(VueHighcharts);
 export default {
   computed: {
     last12months() {
+      // this is the set of columns for our line chart
+      // it also helps us loop through the entry data list
       var today = moment().startOf('month');
       var pastYear = [today.format('YYYY-MM')];
       for (var i = 1; i <= 11; i++) {
         pastYear.push(today.subtract(1, 'months').format('YYYY-MM'));
       }
+      // this gets us the list in ascending order
       return pastYear.reverse();
     },
     pieData() {
@@ -131,7 +134,15 @@ export default {
   data() {
     return {
       chartEntries: this.$store.state.modules.entries.entries,
-      lineChartCatList: this.$store.state.modules.charts.catList,
+      lineChartCatList: [
+        // this is a list of tags we care about
+        'groceries',
+        'utilities',
+        'entertainment',
+        'gas',
+        'woodworking',
+        'restaurant'
+      ],
       options: {
         chart: {
           plotBackgroundColor: null,

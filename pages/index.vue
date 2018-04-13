@@ -17,16 +17,22 @@ import https from 'https';
 
 export default {
   async fetch({ store, params }) {
-    console.log('firing fetch');
+    // initial load of all entry data
+    console.log('firing fetch with ', store, params);
+    // store.commit('DO_STUFF');
+    // this is for local use since everything forces https now and
+    // the local certificate is self signed
     const instance = axios.create({
       httpsAgent: new https.Agent({
         rejectUnauthorized: false
       })
     });
+    // grab the local data from anAPI
     return instance
       .get('https://simple-rest-api.12.ft/api/entry/')
       .then(resp => {
         console.log('fetch entry returned ', resp.data);
+        // set the state for entries
         store.commit('modules/entries/SET_ENTRIES', resp.data);
       });
   },

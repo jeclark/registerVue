@@ -64,7 +64,7 @@ export default {
     },
     clearEntry: function(evt) {
       console.log('firing a clear event with ', this.entryitem);
-      console.log('store state is ', this.$store.state.modules.entries.entries);
+      console.log('store is ', this.$store);
       // send clear to the server
       // on success, send the event
       EventBus.$emit('clear', this.entryitem);

@@ -2,7 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 import https from 'https';
 import lodash from 'lodash';
-
+// TODO: this module is depricated, remove it.
 export const state = () => ({
   lineData: [],
   last12months: [],
