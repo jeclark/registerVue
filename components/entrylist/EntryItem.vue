@@ -51,7 +51,7 @@ export default {
         })
           .then(function(response) {
             // it worked!
-            me.$store.commit('modules/entries/DELETE_ENTRY', formData);
+            me.$store.commit('DELETE_ENTRY', formData);
             // TODO: Update graphs with new data
           })
           .catch(function(response) {

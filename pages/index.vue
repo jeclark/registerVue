@@ -33,7 +33,7 @@ export default {
       .then(resp => {
         console.log('fetch entry returned ', resp.data);
         // set the state for entries
-        store.commit('modules/entries/SET_ENTRIES', resp.data);
+        store.commit('SET_ENTRIES', resp.data);
       });
   },
   components: {

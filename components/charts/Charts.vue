@@ -117,12 +117,13 @@ export default {
   },
   methods: {
     redraw() {
+      // TODO: this also needs to get called on edit
       var chart = this.$refs.highcharts.chart;
       chart.series[0].setData(this.pieData);
 
       var chart2 = this.$refs.highchartsline.chart;
       console.log('chart2 is ', chart2.series);
-
+      // TODO: This second one is not working might need to call update
       chart2.series[0].setData(this.lineData);
     }
   },
@@ -133,7 +134,7 @@ export default {
   },
   data() {
     return {
-      chartEntries: this.$store.state.modules.entries.entries,
+      chartEntries: this.$store.state.entries,
       lineChartCatList: [
         // this is a list of tags we care about
         'groceries',

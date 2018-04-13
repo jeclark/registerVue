@@ -134,12 +134,12 @@ export default {
           // it worked!
           if (me.form.id !== '') {
             console.log('This is an edit of id: ', me.form.id);
-            me.$store.commit('modules/entries/UPDATE_ENTRY', formData);
+            me.$store.commit('UPDATE_ENTRY', formData);
           } else {
             console.log('This is a new entry');
             console.log('response is ', response.data.data[0]);
             formData.id = response.data.data[0].id;
-            me.$store.commit('modules/entries/INSERT_ENTRY', formData);
+            me.$store.commit('INSERT_ENTRY', formData);
           }
           // clear the form values
           me.clearForm();
@@ -162,7 +162,6 @@ export default {
     },
     clearForm: function() {
       // console.log('state is ', this.state);
-      // console.log('store is ', this.$store.state.modules.entries.entries);
       this.form.id = '';
       this.form.payee = '';
       this.form.amount = '';
