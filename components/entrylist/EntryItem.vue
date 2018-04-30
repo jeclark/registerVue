@@ -63,11 +63,50 @@ export default {
       } // else we do nothing
     },
     clearEntry: function(evt) {
+      console.log('evt is ', evt);
+      evt.target.blur();
       console.log('firing a clear event with ', this.entryitem);
       console.log('store is ', this.$store);
-      // send clear to the server
+      var me = this;
+      var clearedTemp = 1;
+      console.log('Before ', me.entryitem.cleared);
+      if (me.entryitem.cleared == 1) {
+        clearedTemp = 0;
+      }
+      console.log('After ', clearedTemp);
+      const instance = axios.create({
+        httpsAgent: new https.Agent({
+          rejectUnauthorized: false
+        })
+      });
+      // send clear (update) to the server
+      console.log('id is ', me.entryitem.id);
+      var formData = {
+        id: me.entryitem.id,
+        payee: me.entryitem.payee,
+        amount: me.entryitem.amount, // this should know when it's negative or positive
+        entrydate: me.entryitem.entrydate,
+        tag: me.entryitem.tag,
+        type: me.entryitem.type,
+        cleared: clearedTemp
+      };
+
+      instance({
+        method: 'put',
+        url: 'https://simple-rest-api.12.ft/api/entry',
+        data: formData
+      })
+        .then(function(response) {
+          // it worked!
+          me.$store.commit('UPDATE_ENTRY', formData);
+          // TODO: Update graphs with new data
+        })
+        .catch(function(response) {
+          // stuff broke - handle error
+          console.log(response);
+        });
       // on success, send the event
-      EventBus.$emit('clear', this.entryitem);
+      EventBus.$emit('save', this.entryitem);
     }
   }
 };

@@ -84,15 +84,17 @@ export default {
       // start listening for edit events and run the function
       // we got an edit event and an entry item from the event bus
       // set the state which updates the form fields
+      console.log('entry is ', entry);
       me.form.id = entry.id;
       me.form.payee = entry.payee;
       me.form.amount = Math.abs(entry.amount);
       me.form.entrydate = entry.entrydate;
       me.form.tag = entry.tag;
       me.form.type = entry.type;
-      if (entry.cleared === '1') {
+      if (entry.cleared == 1) {
         var setCleared = true;
       }
+      console.log('setCleared is ', setCleared);
       me.form.cleared = setCleared;
     });
   },
@@ -115,6 +117,8 @@ export default {
       if (me.form.cleared === true) {
         cleared = 1;
       }
+      console.log('saveEntry and me.form.cleared is ', me.form.cleared);
+      console.log('saveEntry and cleared is ', cleared);
       var formData = {
         id: me.form.id,
         payee: me.form.payee,
@@ -152,13 +156,17 @@ export default {
     },
     setEdit: function(entry) {
       console.log('called setValue with ', entry);
+      var entryCleared = false;
+      if (entry.cleared == 1) {
+        entryCleared = true;
+      }
       this.state.form.id = entry.id;
       this.state.form.payee = entry.payee;
       this.state.form.amount = entry.amount;
       this.state.form.date = entry.entrydate;
       this.state.form.tag = entry.tag;
       this.state.form.type = entry.type;
-      this.state.form.cleared = entry.cleared;
+      this.state.form.cleared = entryCleared;
     },
     clearForm: function() {
       // console.log('state is ', this.state);

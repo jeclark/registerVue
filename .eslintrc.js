@@ -14,6 +14,7 @@ module.exports = {
     'no-console': 0,
     'no-unused-vars': 0,
     'eol-last': 0,
+    'eqeqeq': 0,
     semi: [2, 'always', { omitLastInOneLineBlock: true }],
     'prettier/prettier': [
       'error',

@@ -13,9 +13,20 @@
 
 <script>
 import EntryItem from '~/components/entrylist/EntryItem.vue';
-import { mapGetters, mapActions } from 'vuex';
+import EventBus from '~/components/EventBus.vue'; // needed to update charts
 
 export default {
+  mounted() {
+    // EventBus.$on('edit', function(entry) {
+    //   this.$forceUpdate();
+    // });
+    // EventBus.$on('clear', function(entry) {
+    //   this.$forceUpdate();
+    // });
+    // EventBus.$on('save', function(entry) {
+    //   this.$forceUpdate();
+    // });
+  },
   computed: {
     getEntries: function() {
       var tempEntries = this.$store.state.entries;
@@ -32,6 +43,7 @@ export default {
       }
     },
     getTotal: function() {
+      // TODO: Does not fire on clear or edit
       // console.log('return_total state is ', state.entries);
       if (
         this.$store.state.entries !== undefined &&
@@ -56,8 +68,10 @@ export default {
       ) {
         var total = parseFloat(this.$store.state.entries[0].amount);
         this.$store.state.entries.reduce(function(entries, entry) {
-          if (entry.cleared === '1') {
+          if (entry.cleared == 1) {
             total = total + parseFloat(entry.amount);
+          } else {
+            console.log('not cleared');
           }
         });
         return total.toFixed(2);
